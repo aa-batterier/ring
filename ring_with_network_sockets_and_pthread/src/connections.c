@@ -1,5 +1,10 @@
 #include "ring.h"
 
+/*
+ * Function: start_listen
+ * Use: Creates a socket who listen on the port.
+ * ----------------------------------------------
+ */
 int start_listen(char *port)
 {
 	int sockfd,err,yes = 1;
@@ -48,6 +53,11 @@ int start_listen(char *port)
 	return sockfd;
 }
 
+/*
+ * Function: pass_along
+ * Use: Sends the message to the next port.
+ * -----------------------------------------
+ */
 int pass_along(char *nextPort,message_S *message)
 {
 	int sockfd,err;

@@ -1,5 +1,10 @@
 #include "ring.h"
 
+/*
+ * Function: thr_main
+ * Use: Controlls the main node/thread.
+ * -------------------------------------
+ */
 void *thr_main(void *arg)
 {
 	thread_S *thrS = arg;
@@ -94,6 +99,11 @@ void *thr_main(void *arg)
 	pthread_exit((void*)0);
 }
 
+/*
+ * Function: thr_fn
+ * Use: Controlls the worker nodes/threads.
+ * ------------------------------------------
+ */
 void *thr_fn(void *arg)
 {
 	thread_S *thrS = arg;

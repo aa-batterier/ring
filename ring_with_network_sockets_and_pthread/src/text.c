@@ -1,5 +1,10 @@
 #include "ring.h"
 
+/*
+ * Function: read_line
+ * Use: Reads a line from stdin.
+ * ------------------------------
+ */
 int read_line(char *a,int n)
 {
 	if (fgets(a,n,stdin) == NULL)
@@ -13,6 +18,11 @@ int read_line(char *a,int n)
 	return 1;
 }
 
+/*
+ * Function: remove_nl
+ * Use: Removes the last new line.
+ * --------------------------------
+ */
 int remove_nl(char *a)
 {
 	int i = strlen(a)-1;
@@ -24,12 +34,22 @@ int remove_nl(char *a)
 	return 0;
 }
 
+/*
+ * Function: skip_line
+ * Use: Skips a line.
+ * ----------------------
+ */
 void skip_line(void)
 {
 	int c;
 	while ((c = getchar()) != '\n' && c != EOF);
 }
 
+/*
+ * Function: to_int
+ * Use: Turns a string into an int.
+ * ---------------------------------
+ */
 int to_int(char *a)
 {
 	int sum = 0;
@@ -44,6 +64,11 @@ int to_int(char *a)
 	return sum;
 }
 
+/*
+ * Function: to_string
+ * Use: Turns an int into a string.
+ * ---------------------------------
+ */
 void to_string(char *array,int power,int number)
 {
 	int place = 0;
@@ -56,6 +81,11 @@ void to_string(char *array,int power,int number)
 	array[place] = '\0';
 }
 
+/*
+ * Function: bin_search
+ * Use: Search for an int.
+ * ------------------------
+ */
 int bin_search(int numbers[],int start,int end,int search)
 {
 	int i1 = start,i2 = end,m = 0;

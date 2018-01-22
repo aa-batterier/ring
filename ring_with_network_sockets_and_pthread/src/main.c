@@ -1,5 +1,10 @@
 #include "ring.h"
 
+/*
+ * Function: main
+ * Use: The main function.
+ * ------------------------
+ */
 int main(void)
 {
 	char line[MAX_LINE];
