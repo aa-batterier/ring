@@ -1,8 +1,24 @@
+/*
+ * Information about sourcedevelopment.
+ * -------------------------------------
+ *  Initial creator: Andreas Johansson.
+ *  Date created: 15-01-2018
+ *  Last updated by: Andreas Johansson.
+ *  Date for update: 22-01-2018
+ */
+
+/*
+ * File: connections.c
+ * --------------------
+ *  In this file is all the source code
+ *  for the connections between the nodes.
+ */
+
 #include "ring.h"
 
 /*
  * Function: start_listen
- * Use: Creates a socket who listen on the port.
+ * Usage: Creates a socket who listen on the port.
  * ----------------------------------------------
  */
 int start_listen(char *port)
@@ -55,7 +71,7 @@ int start_listen(char *port)
 
 /*
  * Function: pass_along
- * Use: Sends the message to the next port.
+ * Usage: Sends the message to the next port.
  * -----------------------------------------
  */
 int pass_along(char *nextPort,message_S *message)

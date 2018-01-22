@@ -1,8 +1,24 @@
+/*
+ * Information about sourcedevelopment.
+ * -------------------------------------
+ *  Initial creator: Andreas Johansson.
+ *  Date created: 15-01-2018
+ *  Last updated by: Andreas Johansson.
+ *  Date for update: 22-01-2018
+ */
+
+/*
+ * File: nodes.c
+ * --------------
+ *  In this file is all the source code
+ *  that builds up the nodes.
+ */
+
 #include "ring.h"
 
 /*
  * Function: thr_main
- * Use: Controlls the main node/thread.
+ * Usage: Controlls the main node/thread.
  * -------------------------------------
  */
 void *thr_main(void *arg)
@@ -101,7 +117,7 @@ void *thr_main(void *arg)
 
 /*
  * Function: thr_fn
- * Use: Controlls the worker nodes/threads.
+ * Usage: Controlls the worker nodes/threads.
  * ------------------------------------------
  */
 void *thr_fn(void *arg)

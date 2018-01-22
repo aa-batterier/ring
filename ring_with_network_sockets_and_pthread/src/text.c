@@ -1,8 +1,24 @@
+/*
+ * Information about sourcedevelopment.
+ * -------------------------------------
+ *  Initial creator: Andreas Johansson.
+ *  Date created: 15-01-2018
+ *  Last updated by: Andreas Johansson.
+ *  Date for update: 22-01-2018
+ */
+
+/*
+ * File: text.c
+ * -------------
+ *  In this file is all the source code
+ *  for handleing text and strings.
+ */
+
 #include "ring.h"
 
 /*
  * Function: read_line
- * Use: Reads a line from stdin.
+ * Usage: Reads a line from stdin.
  * ------------------------------
  */
 int read_line(char *a,int n)
@@ -20,7 +36,7 @@ int read_line(char *a,int n)
 
 /*
  * Function: remove_nl
- * Use: Removes the last new line.
+ * Usage: Removes the last new line.
  * --------------------------------
  */
 int remove_nl(char *a)
@@ -36,7 +52,7 @@ int remove_nl(char *a)
 
 /*
  * Function: skip_line
- * Use: Skips a line.
+ * Usage: Skips a line.
  * ----------------------
  */
 void skip_line(void)
@@ -47,7 +63,7 @@ void skip_line(void)
 
 /*
  * Function: to_int
- * Use: Turns a string into an int.
+ * Usage: Turns a string into an int.
  * ---------------------------------
  */
 int to_int(char *a)
@@ -66,7 +82,7 @@ int to_int(char *a)
 
 /*
  * Function: to_string
- * Use: Turns an int into a string.
+ * Usage: Turns an int into a string.
  * ---------------------------------
  */
 void to_string(char *array,int power,int number)
@@ -83,7 +99,7 @@ void to_string(char *array,int power,int number)
 
 /*
  * Function: bin_search
- * Use: Search for an int.
+ * Usage: Search for an int.
  * ------------------------
  */
 int bin_search(int numbers[],int start,int end,int search)
