@@ -1,4 +1,4 @@
-# ring with network sockets and pthread
+# ring with tcp network sockets and pthread
 
 Sends a message throw a ring of nodes.
 
