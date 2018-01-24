@@ -115,3 +115,24 @@ int pass_along(char *nextPort,message_S *message)
 	}
 	return 1;
 }
+
+/*
+ * Function: send_all
+ * Usage: Make sure that everything is sent.
+ * ------------------------------------------
+ */
+int send_all(int sockfd,void *message,int *len)
+{
+	int total = 0,bytesleft = *len,n;
+	while (total < *len)
+	{
+		if ((n = send(sockfd,message+total,bytesleft,0)) < 0)
+		{
+			break;
+		}
+		total += n;
+		bytesleft -= n;
+	}
+	*len = total;
+	return n == -1 ? 0:1;
+}
