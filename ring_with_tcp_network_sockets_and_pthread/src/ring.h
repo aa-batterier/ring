@@ -140,6 +140,16 @@ int start_listen(char *port);
  */
 int pass_along(char *nextPort,message_S *message);
 
+/*
+ * Function: send_all
+ * Usage: Make sure that everything is sent.
+ * ------------------------------------------
+ *  send_all make sure that everything is sent.
+ *  If send_all failes it returns 0, on success
+ *  it returns 1.
+ */
+int send_all(int sockfd,void *message,int *len);
+
 /* nodes.c */
 
 /*

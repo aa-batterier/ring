@@ -108,9 +108,14 @@ int pass_along(char *nextPort,message_S *message)
 		return 0;
 	}
 	p = NULL;
-	if (send(sockfd,message,MESSAGE,0) < 0)
+	/*if (send(sockfd,message,MESSAGE,0) < 0)
 	{
 		perror("send");
+		return 0;
+	}*/
+	if (!send_all(sockfd,message,MESSAGE))
+	{
+		fprintf(stderr,"send_all failed\n");
 		return 0;
 	}
 	return 1;
