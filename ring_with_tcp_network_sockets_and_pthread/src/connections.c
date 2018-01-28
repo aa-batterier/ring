@@ -76,7 +76,7 @@ int start_listen(char *port)
  */
 int pass_along(char *nextPort,message_S *message)
 {
-	int sockfd,err;
+	int sockfd,err,len = MESSAGE;
 	struct addrinfo hints,*p,*ai;
 	memset(&hints,0,sizeof(hints));
 	hints.ai_family = AF_UNSPEC;
@@ -113,9 +113,9 @@ int pass_along(char *nextPort,message_S *message)
 		perror("send");
 		return 0;
 	}*/
-	if (!send_all(sockfd,message,MESSAGE))
+	if (!send_all(sockfd,message,&len))
 	{
-		fprintf(stderr,"send_all failed\n");
+		fprintf(stderr,"send_all failed, amount of byte sent was %d\n",len);
 		return 0;
 	}
 	return 1;
