@@ -51,10 +51,19 @@
  * Constant: START_PORT
  * ---------------------
  *  Defines the starting port.
- *  9000 and higer is above the
+ *  9000 and higher are above the
  *  registered ports.
  */
 #define START_PORT "9000\0"
+
+/*
+ * Constant: POWER
+ * ----------------
+ *  Defines the power of the
+ *  ports who needs to be transformed
+ *  from integers to strings.
+ */
+#define POWER strlen(START_PORT)-1
 
 /*
  * Constant: END

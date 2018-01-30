@@ -35,7 +35,7 @@ int main(void)
 	}
 	if ((numberThreads = to_int(line)) < 0)
 	{
-		fprintf(stderr,"wrong input");
+		fprintf(stderr,"wrong input.\n");
 		exit(1);
 	}
 	printf("Number of times: ");
@@ -88,7 +88,7 @@ int main(void)
 	sleep(1);
 	if (!pass_along(START_PORT,&message))
 	{
-		fprintf(stderr,"pass_along failed\n");
+		fprintf(stderr,"pass_along failed.\n");
 		exit(1);
 	}
 	if ((err = pthread_join(tid[0],&trv)) < 0)

@@ -76,6 +76,10 @@ int to_int(char *a)
 		{
 			sum += n*i;
 		}
+		else
+		{
+			return -1; // It's ok to return -1 as error becuase we don't want negative numbers or letters.
+		}
 	}
 	return sum;
 }
@@ -90,8 +94,8 @@ void to_string(char *array,int power,int number)
 	int place = 0;
 	for (; power >= 0; power--,place++)
 	{
-		int singular = number/pow(10,power);
-		number -= singular*pow(10,power);
+		int lpow = pow(10,power),singular = number/lpow;
+		number -= singular*lpow;
 		array[place] = singular+'0';
 	}
 	array[place] = '\0';
