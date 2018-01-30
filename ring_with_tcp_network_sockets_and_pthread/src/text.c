@@ -68,13 +68,13 @@ void skip_line(void)
  */
 int to_int(char *a)
 {
-	int sum = 0;
-	int numbers[] = {0,1,2,3,4,5,6,7,8,9};
+	int sum = 0,numbers[] = {0,1,2,3,4,5,6,7,8,9};
 	for (int i = pow(10,strlen(a)-1),j = 0; a[j] != '\0'; i /= 10,j++)
 	{
-		if (bin_search(numbers,0,9,a[j]-'0'))
+		int n = a[j] - '0';
+		if (bin_search(numbers,0,9,n))
 		{
-			sum += (a[j] - '0')*i;
+			sum += n*i;
 		}
 	}
 	return sum;
