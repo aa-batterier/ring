@@ -1,3 +1,20 @@
+/*
+ * Information about sourcedevelopment.
+ * -------------------------------------
+ *  Initial creator: Andreas Johansson.
+ *  Date created: 30-01-2018
+ *  Last updated by: Andreas Johansson.
+ *  Date for update: 30-01-2018
+ */
+
+/*
+ * File: text.c
+ * -------------
+ *  In this file is the source code
+ *  for all the functions which handels all
+ *  the text in this program.
+ */
+
 #include "ring.h"
 
 /*
@@ -59,6 +76,10 @@ int to_int(char *a)
 		if (bin_search(numbers,0,9,n))
 		{
 			sum += n*i;
+		}
+		else
+		{
+			return -1; // It's ok to return -1 as error because we don't want negative numbers or letters.
 		}
 	}
 	return sum;
