@@ -59,14 +59,14 @@ int main(void)
 	thread_S thrS[numberThreads];
 	for (int i = 0; i < numberThreads; i++)
 	{
-		to_string(thrS[i].port,strlen(START_PORT)-1,to_int(START_PORT)+i);
+		to_string(thrS[i].port,POWER,to_int(START_PORT)+i);
 		if (i == numberThreads-1)
 		{
-			to_string(thrS[i].nextPort,strlen(START_PORT)-1,to_int(START_PORT));
+			to_string(thrS[i].nextPort,POWER,to_int(START_PORT));
 		}
 		else
 		{
-			to_string(thrS[i].nextPort,strlen(START_PORT)-1,to_int(START_PORT)+i+1);
+			to_string(thrS[i].nextPort,POWER,to_int(START_PORT)+i+1);
 		}
 		if (i == 0)
 		{
