@@ -27,6 +27,7 @@ void *thr_main(void *arg)
 	int sockfd = start_listen(thrS->port);
 	struct sockaddr_storage remoteAddr;
 	socklen_t addrLen = sizeof(remoteAddr);
+	printf("Node %s is up.\n",thrS->port);
 	for (;;)
 	{
 		message_S *message = (message_S*)malloc(MESSAGE);
@@ -81,6 +82,7 @@ void *thr_fn(void *arg)
 	int sockfd = start_listen(thrS->port);
 	struct sockaddr_storage remoteAddr;
 	socklen_t addrLen = sizeof(remoteAddr);
+	printf("Node %s is up.\n",thrS->port);
 	for (;;)
 	{
 		message_S *message = (message_S*)malloc(MESSAGE);

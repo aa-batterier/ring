@@ -121,6 +121,9 @@ typedef struct
  * Function: start_listen
  * Usage: Creates a socket to listen on.
  * --------------------------------------
+ *  start_listen creates a socket for the port
+ *  you specificed to listen on. It returnes the socket
+ *  on success or -1 on failure.
  */
 int start_listen(char *port);
 
@@ -128,18 +131,45 @@ int start_listen(char *port);
  * Function: pass_along
  * Usage: Passes along the message.
  * ---------------------------------
+ *  pass_along send the message you specify to
+ *  the port you specify. It returns 1 at success
+ *  and 0 at failure.
  */
 int pass_along(char *nextPort,message_S *message);
 
-/*nodes.c*/
+/* nodes.c */
+
+/*
+ * Function: thr_main
+ * Usage: Controlls the main node/thread.
+ * ---------------------------------------
+ *  thr_main controlls how the main node/thread should
+ *  act, the main node is the node who is in controll of
+ *  the ring and ends the ring when time comes.
+ *  thr_main returns 0 at success and -1 at failure.
+ */
 void *thr_main(void *arg);
+
+/*
+ * Function: thr_fn
+ * Usage: Controlls the worker nodes/threads.
+ * -------------------------------------------
+ *  thr_fn controlls how the worker nodes/threads should
+ *  act, the worker nodes/threads only passes along the message
+ *  to the next node in the ring.
+ *  thr_fn returns 0 at success and -1 at failure.
+ */
 void *thr_fn(void *arg);
 
-/*text.c*/
+/* text.c */
+
 /*
  * Function: read_line
  * Usage: Reads a line from stdin.
  * --------------------------------
+ *  read_line reads a line from standard input
+ *  into an array of chars. It returns 1 at success
+ *  and 0 at failure.
  */
 int read_line(char *a,int n);
 
@@ -147,6 +177,10 @@ int read_line(char *a,int n);
  * Function: remove_nl
  * Usage: Removes new line at the end.
  * ------------------------------------
+ *  remove_nl removes the last new line in
+ *  a string. If the string doesn't have a new line
+ *  as it's last char then remove_nl returns 0
+ *  else it returns 1.
  */
 int remove_nl(char *a);
 
@@ -154,6 +188,7 @@ int remove_nl(char *a);
  * Function: skip_line
  * Usage: Skips a line.
  * ---------------------
+ *  skip_line skips a line.
  */
 void skip_line(void);
 
@@ -161,6 +196,9 @@ void skip_line(void);
  * Function: to_int
  * Usage: Transform a string into an int.
  * ---------------------------------------
+ *  to_int transform a string into an positiv int.
+ *  We don't want negative numbers in this program
+ *  so it returns -1 at failure and the integer at success.
  */
 int to_int(char *a);
 
@@ -168,6 +206,8 @@ int to_int(char *a);
  * Function: to_string
  * Usage: Transform an int into a string.
  * ---------------------------------------
+ *  to_string transform an integer into a string.
+ *  The string is retunred in an array.
  */
 void to_string(char *a,int power,int n);
 
@@ -175,5 +215,9 @@ void to_string(char *a,int power,int n);
  * Function: bin_search
  * Usage: Search after a specific integer.
  * ----------------------------------------
+ *  bin_search uses binary search to search for
+ *  a specific integer in an array of integers.
  */
 int bin_search(int a[],int start,int end,int x);
+
+#endif
