@@ -1,6 +1,6 @@
 # ring with tcp network sockets and pthread
 
-Sends a message throw a ring of nodes.
+Sends a message through a ring of nodes.
 
 The nodes are threads and the nodes are connected through tcp network sockets.
 
