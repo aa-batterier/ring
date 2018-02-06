@@ -24,12 +24,18 @@
 void *thr_main(void *arg)
 {
 	thread_S *thrS = arg;
-	fd_set master,read_fds;
+	int sockfd,newfd,nb;
 	struct sockaddr_storage remoteAddr;
 	socklen_t addrLen = sizeof(remoteAddr);
+	fd_set master,read_fds;
 	FD_ZERO(&master);
 	FD_ZERO(&read_fds);
-	int sockfd = start_listen(thrS->port),fdmax = sockfd,newfd,nb;
+	if ((sockfd = start_listen(thrS->port)) < 0)
+	{
+		fprintf(stderr,"start_listen");
+		pthread_exit((void*)-1);
+	}
+	int fdmax = sockfd;
 	FD_SET(sockfd,&master);
 	printf("Node %s is up.\n",thrS->port);
 	for (;;)
@@ -123,12 +129,18 @@ void *thr_main(void *arg)
 void *thr_fn(void *arg)
 {
 	thread_S *thrS = arg;
+	int sockfd,newfd,nb;
 	struct sockaddr_storage remoteAddr;
 	socklen_t addrLen = sizeof(remoteAddr);
 	fd_set master,read_fds;
 	FD_ZERO(&master);
 	FD_ZERO(&read_fds);
-	int sockfd = start_listen(thrS->port),fdmax = sockfd,newfd,nb;
+	if ((sockfd = start_listen(thrS->port)) < 0)
+	{
+		fprintf(stderr,"start_listen failed\n");
+		pthread_exit((void*)-1);
+	}
+	int fdmax = sockfd;
 	FD_SET(sockfd,&master);
 	printf("Node %s is up.\n",thrS->port);
 	for (;;)
