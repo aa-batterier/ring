@@ -1,5 +1,10 @@
 #include "ring.h"
 
+/*
+ * Function: start_listen
+ * Usage: Starts listen on an unix socket.
+ * ----------------------------------------
+ */
 int start_listen(char *name)
 {
 	int sockfd;
@@ -24,7 +29,7 @@ int start_listen(char *name)
 		perror("bind");
 		return -1;
 	}
-	if (listen(sockfd,(struct sockaddr*)&un,len) < 0)
+	if (listen(sockfd,QLEN) < 0)
 	{
 		perror("listen");
 		return -1;
@@ -32,6 +37,11 @@ int start_listen(char *name)
 	return sockfd;
 }
 
+/*
+ * Function: accept_socket
+ * Usage: Accepting a connection on an unix socket.
+ * -------------------------------------------------
+ */
 int accept_socket(int sockfd,uid_t *uidptr)
 {
 	int acceptfd;
@@ -88,7 +98,75 @@ int accept_socket(int sockfd,uid_t *uidptr)
 	return acceptfd;
 }
 
+/*
+ * Function: start_connect
+ * Usage: Start a connection to an unix socket.
+ * ---------------------------------------------
+ */
 int start_connect(char *name)
 {
 	int sockfd;
 	struct sockaddr_un un,sun;
+	if (strlen(name) >= sizeof(un.sun_path))
+	{
+		fprintf(stderr,"name too long");
+		return -1;
+	}
+	if ((sockfd = socket(AF_UNIX,SOCK_STREAM,0)) < 0)
+	{
+		perror("socket");
+		return -1;
+	}
+	memset(&un,0,sizeof(un));
+	un.sun_family = AF_UNIX;
+	sprintf(un.sun_path,"%s%05ld",CLI_PATH,(long)getpid());
+	int len = offsetof(struct sockaddr_un,sun_path) + strlen(name);
+	unlink(name);
+	if (bind(sockfd,(struct sockaddr*)&un,len) < 0)
+	{
+		perror("bind");
+		close(sockfd);
+		return -1;
+	}
+	if (chmod(un.sun_path,CLI_PERM) < 0)
+	{
+		perror("chmod");
+		close(sockfd);
+		unlink(un.sun_path);
+		return -1;
+	}
+	memset(&sun,0,sizeof(sun));
+	sun.sun_family = AF_UNIX;
+	strcpy(sun.sun_path,name);
+	if (connect(sockfd,(struct sockaddr*)&sun,len) < 0)
+	{
+		perror("connect");
+		close(sockfd);
+		unlink(un.sun_path);
+		return -1;
+	}
+	return sockfd;
+}
+
+/*
+ * Function: pass_along
+ * Usage: Passing along message to the next node.
+ * -----------------------------------------------
+ */
+int pass_along(char *name,Message *message)
+{
+	int sockfd;
+	if ((sockfd = start_connect(name)) < 0)
+	{
+		fprintf(stderr,"start_connect failed\n");
+		return 0;
+	}
+	if (send(sockfd,message,MESSAGE,0) < 0)
+	{
+		perror("send");
+		close(sockfd);
+		return 0;
+	}
+	close(sockfd);
+	return 1;
+}
