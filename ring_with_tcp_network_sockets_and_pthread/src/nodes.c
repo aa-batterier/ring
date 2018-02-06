@@ -32,7 +32,7 @@ void *thr_main(void *arg)
 	FD_ZERO(&read_fds);
 	if ((sockfd = start_listen(thrS->port)) < 0)
 	{
-		fprintf(stderr,"start_listen");
+		fprintf(stderr,"start_listen failed\n");
 		pthread_exit((void*)-1);
 	}
 	int fdmax = sockfd;
