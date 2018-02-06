@@ -13,10 +13,10 @@
 #include <pthread.h>
 
 #define MAX_LINE 1000
-#define START_NAME "0"
-#define END "end"
+#define START_NAME "0\0"
+#define END "end\0"
 #define POWER strlen(START_NAME)-1
-#define CLI_PATH "/tmp/"
+#define CLI_PATH "./"
 #define STALE 30
 #define QLEN 10
 #define CLI_PERM S_IRWXU

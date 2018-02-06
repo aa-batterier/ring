@@ -19,6 +19,7 @@ void *thr_main(void *arg)
 	}
 	int fdmax = sockfd;
 	FD_SET(sockfd,&master);
+	printf("Node %s is up.\n",thrS->name);
 	for (;;)
 	{
 		read_fds = master;
@@ -62,10 +63,10 @@ void *thr_main(void *arg)
 					}
 					else
 					{
-						printf("%s: Got message %s,",thrS->name,message->text);
+						printf("Node %s: Got message %s,",thrS->name,message->text);
 						if (strcmp(message->text,END) == 0)
 						{
-							printf(" ending this thread.\n");
+							printf(" ending this node.\n");
 							close(sockfd);
 							close(acceptfd);
 							free(message);
@@ -87,7 +88,7 @@ void *thr_main(void *arg)
 						}
 						else
 						{
-							printf(" sending it to %s.\n",thrS->next);
+							printf(" sending it to node %s.\n",thrS->next);
 							message->count--;
 							if (!pass_along(thrS->next,message))
 							{
@@ -128,6 +129,7 @@ void *thr_fn(void *arg)
 	}
 	int fdmax = sockfd;
 	FD_SET(sockfd,&master);
+	printf("Node %s is up.\n",thrS->name);
 	for (;;)
 	{
 		read_fds = master;
@@ -170,10 +172,10 @@ void *thr_fn(void *arg)
 					}
 					else
 					{
-						printf("%s: Got message %s, sending it to %s.",thrS->name,message->text,thrS->next);
+						printf("Node %s: Got message %s, sending it to node %s.",thrS->name,message->text,thrS->next);
 						if (strcmp(message->text,END) == 0)
 						{
-							printf(" Ending this thread.\n");
+							printf(" Ending this node.\n");
 							if (!pass_along(thrS->next,message))
 							{
 								fprintf(stderr,"pass_along failed\n");

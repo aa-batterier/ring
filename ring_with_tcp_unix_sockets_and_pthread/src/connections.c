@@ -120,8 +120,8 @@ int start_connect(char *name)
 	memset(&un,0,sizeof(un));
 	un.sun_family = AF_UNIX;
 	sprintf(un.sun_path,"%s%05ld",CLI_PATH,(long)pthread_self());
-	int len = offsetof(struct sockaddr_un,sun_path) + strlen(name);
-	unlink(name);
+	int len = offsetof(struct sockaddr_un,sun_path) + strlen(un.sun_path);
+	unlink(un.sun_path);
 	if (bind(sockfd,(struct sockaddr*)&un,len) < 0)
 	{
 		perror("bind");

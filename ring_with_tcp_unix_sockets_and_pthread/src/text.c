@@ -53,14 +53,14 @@ void skip_line(void)
 int to_int(char *a)
 {
 	int sum = 0,nL[] = {0,1,2,3,4,5,6,7,8,9};
-	for (int i = strlen(a)-1,j = 0; a[j] != '\0'; i /= 10,j++)
+	for (int i = pow(10,strlen(a)-1),j = 0; a[j] != '\0'; i /= 10,j++)
 	{
-		int n = a[j]*i;
+		int n = a[j] - '0';
 		if (!bin_search(nL,0,9,n))
 		{
 			return -1;
 		}
-		sum += n;
+		sum += n*i;
 	}
 	return sum;
 }

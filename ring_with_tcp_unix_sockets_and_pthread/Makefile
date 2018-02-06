@@ -16,4 +16,4 @@ bin/ring: lib/connections.o lib/main.o lib/nodes.o lib/text.o src/ring.h
 	gcc -Wall -g -o $@ lib/connections.o lib/main.o lib/nodes.o lib/text.o -lm -pthread
 
 clean:
-	rm -rv lib/* bin/*
+	rm -v lib/* bin/*

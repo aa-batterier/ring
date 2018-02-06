@@ -81,5 +81,9 @@ int main(void)
 		exit(1);
 	}
 	printf("The ring has ended, return value from the main node is %lu.\n",(unsigned long)trv);
+	for (int i = 0; i < numberThreads; i++)
+	{
+		unlink(thrS[i].name);
+	}
 	exit(0);
 }
