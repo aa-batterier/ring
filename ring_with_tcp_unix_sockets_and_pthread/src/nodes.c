@@ -45,7 +45,7 @@ void *thr_main(void *arg)
 						{
 							fdmax = acceptfd;
 						}
-						FD_SET(accetfd,&master);
+						FD_SET(acceptfd,&master);
 					}
 				}
 				else
@@ -62,7 +62,7 @@ void *thr_main(void *arg)
 					}
 					else
 					{
-						printf("%s: Got message %s,",thrS->name,messsage->text);
+						printf("%s: Got message %s,",thrS->name,message->text);
 						if (strcmp(message->text,END) == 0)
 						{
 							printf(" ending this thread.\n");
@@ -78,7 +78,7 @@ void *thr_main(void *arg)
 							strcpy(message->text,END);
 							if (!pass_along(thrS->next,message))
 							{
-								fprintf("pass_along failed\n");
+								fprintf(stderr,"pass_along failed\n");
 								close(sockfd);
 								close(acceptfd);
 								free(message);

@@ -50,11 +50,11 @@ int main(void)
 		}
 		else
 		{
-			to_string(thrS[i].next.POWER,to_int(START_NAME)+i+1);
+			to_string(thrS[i].next,POWER,to_int(START_NAME)+i+1);
 		}
 		if (i == 0)
 		{
-			if ((err = pthread_create(tid[i],NULL,thr_main,thrS[i])) < 0)
+			if ((err = pthread_create(&tid[i],NULL,thr_main,&thrS[i])) < 0)
 			{
 				fprintf(stderr,"pthread_create failed: %s\n",strerror(err));
 				exit(1);
@@ -62,7 +62,7 @@ int main(void)
 		}
 		else
 		{
-			if ((err = pthread_create(tid[i],NULL,thr_fn,thrS[i])) < 0)
+			if ((err = pthread_create(&tid[i],NULL,thr_fn,&thrS[i])) < 0)
 			{
 				fprintf(stderr,"pthread_create failed: %s\n",strerror(err));
 				exit(1);

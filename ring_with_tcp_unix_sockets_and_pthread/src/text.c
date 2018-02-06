@@ -87,7 +87,7 @@ void to_string(char *a,int power,int number)
  * Usage: Search for an int in a list.
  * ------------------------------------
  */
-int bin_search(int list,int start,int end,int x)
+int bin_search(int list[],int start,int end,int x)
 {
 	int mid;
 	while (start <= end)

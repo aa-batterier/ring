@@ -1,7 +1,7 @@
 all: bin/ring
 
-lib/connection.o: src/connection.c src/ring.h
-	gcc -Wall -g -c -o $@ src/connection.c
+lib/connections.o: src/connections.c src/ring.h
+	gcc -Wall -g -c -o $@ src/connections.c -pthread
 
 lib/main.o: src/main.c src/ring.h
 	gcc -Wall -g -c -o $@ src/main.c -pthread
@@ -9,11 +9,11 @@ lib/main.o: src/main.c src/ring.h
 lib/nodes.o: src/nodes.c src/ring.h
 	gcc -Wall -g -c -o $@ src/nodes.c -pthread
 
-lib/text.o: src/text.c ring.h
+lib/text.o: src/text.c src/ring.h
 	gcc -Wall -g -c -o $@ src/text.c -lm
 
-bin/ring: lib/connection.o lib/main.o lib/nodes.o lib/text.o ring.h
-	gcc -Wall -g -o $@ lib/connection.o lib/main.o lib/nodes.o lib/text.o -lm -pthread
+bin/ring: lib/connections.o lib/main.o lib/nodes.o lib/text.o src/ring.h
+	gcc -Wall -g -o $@ lib/connections.o lib/main.o lib/nodes.o lib/text.o -lm -pthread
 
 clean:
 	rm -rv lib/* bin/*

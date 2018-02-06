@@ -4,7 +4,10 @@
 #include <math.h>
 #include <unistd.h>
 #include <time.h>
+#include <stddef.h>
 #include <sys/un.h> 
+#include <sys/stat.h>
+#include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/select.h>
 #include <pthread.h>
@@ -16,6 +19,8 @@
 #define CLI_PATH "/tmp/"
 #define STALE 30
 #define QLEN 10
+#define CLI_PERM S_IRWXU
+#define MESSAGE sizeof(Message)
 
 typedef struct
 {
@@ -26,7 +31,7 @@ typedef struct
 {
 	char text[MAX_LINE];
 	int count;
-}
+}Message;
 
 /* connections.c */
 
@@ -116,4 +121,4 @@ void to_string(char *a,int power,int number);
  * Usage: Search for an int in a list.
  * ------------------------------------
  */
-int bin_search(int list,int start,int end,int x);
+int bin_search(int list[],int start,int end,int x);

@@ -20,7 +20,7 @@ int start_listen(char *name)
 		return -1;
 	}
 	unlink(name);
-	memset(un,0,sizeof(un));
+	memset(&un,0,sizeof(un));
 	un.sun_family = AF_UNIX;
 	strcpy(un.sun_path,name);
 	int len = offsetof(struct sockaddr_un,sun_path) + strlen(name);
@@ -82,7 +82,7 @@ int accept_socket(int sockfd,uid_t *uidptr)
 		return -1;
 	}
 	time_t staletime = time(NULL) - STALE;
-	if (statbuf.st_atime < staletime || stabuf.st_ctime < staletime || statbuf.st_mtime < staletime)
+	if (statbuf.st_atime < staletime || statbuf.st_ctime < staletime || statbuf.st_mtime < staletime)
 	{
 		fprintf(stderr,"i-node is too old\n");
 		close(acceptfd);
@@ -119,7 +119,7 @@ int start_connect(char *name)
 	}
 	memset(&un,0,sizeof(un));
 	un.sun_family = AF_UNIX;
-	sprintf(un.sun_path,"%s%05ld",CLI_PATH,(long)getpid());
+	sprintf(un.sun_path,"%s%05ld",CLI_PATH,(long)pthread_self());
 	int len = offsetof(struct sockaddr_un,sun_path) + strlen(name);
 	unlink(name);
 	if (bind(sockfd,(struct sockaddr*)&un,len) < 0)
