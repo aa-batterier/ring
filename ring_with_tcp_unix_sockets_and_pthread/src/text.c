@@ -1,3 +1,20 @@
+/*
+ * Information about sourcedevelopment.
+ * -------------------------------------
+ *  Initial creator: Andreas Johansson.
+ *  Date created: 06-02-2018
+ *  Last updated by: Andreas Johansson.
+ *  Date for update: 06-02-2018
+ */
+
+/*
+ * File: text.c
+ * --------------------
+ *  In this file is all the source code
+ *  for the functions which handels all
+ *  the text in the program.
+ */
+
 #include "ring.h"
 
 /*

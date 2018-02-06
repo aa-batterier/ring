@@ -1,3 +1,19 @@
+/*
+ * Information about sourcedevelopment.
+ * -------------------------------------
+ *  Initial creator: Andreas Johansson.
+ *  Date created: 06-02-2018
+ *  Last updated by: Andreas Johansson.
+ *  Date for update: 06-02-2018
+ */
+
+/*
+ * File: connections.c
+ * --------------------
+ *  In this file is all the source code
+ *  for the connections between the nodes.
+ */
+
 #include "ring.h"
 
 /*
@@ -119,7 +135,7 @@ int start_connect(char *name)
 	}
 	memset(&un,0,sizeof(un));
 	un.sun_family = AF_UNIX;
-	sprintf(un.sun_path,"%s%05ld",CLI_PATH,(long)pthread_self());
+	sprintf(un.sun_path,"%s%05ld",PATH,(long)pthread_self());
 	int len = offsetof(struct sockaddr_un,sun_path) + strlen(un.sun_path);
 	unlink(un.sun_path);
 	if (bind(sockfd,(struct sockaddr*)&un,len) < 0)
@@ -128,7 +144,7 @@ int start_connect(char *name)
 		close(sockfd);
 		return -1;
 	}
-	if (chmod(un.sun_path,CLI_PERM) < 0)
+	if (chmod(un.sun_path,PERM) < 0)
 	{
 		perror("chmod");
 		close(sockfd);
@@ -150,8 +166,8 @@ int start_connect(char *name)
 
 /*
  * Function: pass_along
- * Usage: Passing along message to the next node.
- * -----------------------------------------------
+ * Usage: Passing along message to a node.
+ * ----------------------------------------
  */
 int pass_along(char *name,Message *message)
 {

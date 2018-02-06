@@ -1,3 +1,19 @@
+/*
+ * Information about sourcedevelopment.
+ * -------------------------------------
+ *  Initial creator: Andreas Johansson.
+ *  Date created: 06-02-2018
+ *  Last updated by: Andreas Johansson.
+ *  Date for update: 06-02-2018
+ */
+
+/*
+ * File: nodes.c
+ * --------------------
+ *  In this file is all the source code
+ *  for the nodes and how the are controlled.
+ */
+
 #include "ring.h"
 
 /*

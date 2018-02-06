@@ -1,3 +1,20 @@
+/*
+ * Information about sourcedevelopment.
+ * -------------------------------------
+ *  Initial creator: Andreas Johansson.
+ *  Date created: 06-02-2018
+ *  Last updated by: Andreas Johansson.
+ *  Date for update: 06-02-2018
+ */
+
+/*
+ * File: main.c
+ * --------------------
+ *  In this file is all the source code
+ *  for the main function which is the
+ *  center of the program.
+ */
+
 #include "ring.h"
 
 /*
