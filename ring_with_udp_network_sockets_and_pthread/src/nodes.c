@@ -24,9 +24,14 @@
 void *thr_main(void *arg)
 {
 	thread_S *thrS = (thread_S*)arg;
-	int sockfd = start_listen(thrS->port);
+	int sockfd;
 	struct sockaddr_storage remoteAddr;
 	socklen_t addrLen = sizeof(remoteAddr);
+	if ((sockfd = start_listen(thrS->port)) < 0)
+	{
+		fprintf(stderr,"start_listen failed\n");
+		pthread_exit((void*)-1);
+	}
 	printf("Node %s is up.\n",thrS->port);
 	for (;;)
 	{
@@ -79,9 +84,14 @@ void *thr_main(void *arg)
 void *thr_fn(void *arg)
 {
 	thread_S *thrS = (thread_S*)arg;
-	int sockfd = start_listen(thrS->port);
+	int sockfd;
 	struct sockaddr_storage remoteAddr;
 	socklen_t addrLen = sizeof(remoteAddr);
+	if ((sockfd = start_listen(thrS->port)) < 0)
+	{
+		fprintf(stderr,"start_listen failed\n");
+		pthread_exit((void*)-1);
+	}
 	printf("Node %s is up.\n",thrS->port);
 	for (;;)
 	{
