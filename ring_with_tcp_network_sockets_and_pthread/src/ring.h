@@ -124,6 +124,31 @@ typedef struct
 	int count;
 }message_S;
 
+/*
+ * Typedefinition: list_S
+ * -----------------------
+ *  Contains the pointer to the first
+ *  node in the list and the number
+ *  of nodes in the list.
+ */
+typedef struct
+{
+	node_S *first;
+	int n;
+}list_S;
+
+/*
+ * Typedefinition: node_S
+ * -----------------------
+ *  Contains the pointer to the next node
+ *  in the list and the data in that node.
+ */
+typedef struct
+{
+	node_S *next;
+	void *data;
+}node_S;
+
 /* Function prototypes. */
 
 /* connections.c */
