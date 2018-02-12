@@ -99,6 +99,7 @@
 typedef struct
 {
 	char port[MAX_PORT],nextPort[MAX_PORT];
+	pthread_t tid;
 }thread_S;
 
 /*
@@ -112,6 +113,32 @@ typedef struct
 	char text[MAX_LINE];
 	int count;
 }message_S;
+
+/*
+ * Typedefinition: node_S
+ * -----------------------
+ *  Contains the data for the node and a pointer
+ *  to the next node in the list. I don't use
+ *  typedef here because I need a pointer of the
+ *  same typed as the struct.
+ */
+struct node_S
+{
+	struct node_S *next;
+	void *data;
+};
+
+/*
+ * Typedefinition: list_S
+ * -----------------------
+ *  Contains a pointer to the first node in the list and
+ *  the size of the list (the amount of nodes in the list).
+ */
+typedef struct
+{
+	struct node_S *first;
+	int size;
+}list_S;
 
 /* Function prototypes. */
 
@@ -136,6 +163,63 @@ int start_listen(char *port);
  *  and 0 at failure.
  */
 int pass_along(char *nextPort,message_S *message);
+
+/* list.c */
+
+/*
+ * Function: new_list
+ * Usage: Creates a new list.
+ * ---------------------------
+ *  new_list creates a new list and returns
+ *  a pointer to it.
+ */
+list_S *new_list(void);
+
+/*
+ * Function: new_node
+ * Usage: Creates a new node.
+ * ---------------------------
+ *  new_node creates a new node with the data
+ *  which is defined in the parameter.
+ *  It returns a pointer to the new node.
+ */
+struct node_S *new_node(void *data);
+
+/*
+ * Function: add_first
+ * Usage: Addes a new node to the front of the list.
+ * --------------------------------------------------
+ *  add_first creates and adds a new node to
+ *  the front of the list.
+ */
+void add_first(list_S *l,void *data);
+
+/*
+ * Function: remove_first
+ * Usage: Removes the first node in the list.
+ * -------------------------------------------
+ *  remove_first removes the first node in the list.
+ */
+void remove_first(list_S *l);
+
+/*
+ * Function: get_first
+ * Usage: Returns the data from the first node.
+ * ---------------------------------------------
+ *  get_first returns the data in the first node
+ *  in the list. If the fist node doesn't exist
+ *  then get_first returns NULL.
+ */
+void *get_first(list_S *l);
+
+/*
+ * Function: list_size
+ * Usage: Returns the size of the list.
+ * -------------------------------------
+ *  list_size returns the size of the list
+ *  (amount of nodes in the list).
+ */
+int list_size(list_S *l);
 
 /* nodes.c */
 
