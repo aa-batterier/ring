@@ -34,7 +34,7 @@ void add_first(list_S *l,void *data)
 	struct node_S *newNode = new_node(data);
 	newNode->next = l->first;
 	l->first = newNode;
-	l->n++;
+	l->size++;
 }
 
 /*
@@ -49,7 +49,7 @@ void remove_first(list_S *l)
 		struct node_S *removeNode = l->first;
 		l->first = removeNode->next;
 		free(removeNode);
-		l->n--;
+		l->size--;
 	}
 }
 
@@ -74,5 +74,5 @@ void *get_first(list_S *l)
  */
 int list_size(list_S *l)
 {
-	return l->n;
+	return l->size;
 }

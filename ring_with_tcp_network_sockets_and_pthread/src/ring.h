@@ -130,6 +130,9 @@ typedef struct
  * -----------------------
  *  Contains the pointer to the next node
  *  in the list and the data in that node.
+ *  I don't use typedef here because I need a
+ *  pointer of the same type as this struct
+ *  in this struct.
  */
 struct node_S
 {
@@ -147,7 +150,7 @@ struct node_S
 typedef struct
 {
 	struct node_S *first;
-	int n;
+	int size;
 }list_S;
 
 /* Function prototypes. */
