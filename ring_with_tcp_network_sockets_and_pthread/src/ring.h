@@ -105,11 +105,12 @@
  * -------------------------
  *  Contains all the arguments that the
  *  threads needs, it's own port and the
- *  next port.
+ *  next port, plus the nodes thread id.
  */
 typedef struct
 {
 	char port[MAX_PORT],nextPort[MAX_PORT];
+	pthread_t tid;
 }thread_S;
 
 /*
@@ -125,6 +126,18 @@ typedef struct
 }message_S;
 
 /*
+ * Typedefinition: node_S
+ * -----------------------
+ *  Contains the pointer to the next node
+ *  in the list and the data in that node.
+ */
+struct node_S
+{
+	struct node_S *next;
+	void *data;
+};
+
+/*
  * Typedefinition: list_S
  * -----------------------
  *  Contains the pointer to the first
@@ -133,21 +146,9 @@ typedef struct
  */
 typedef struct
 {
-	node_S *first;
+	struct node_S *first;
 	int n;
 }list_S;
-
-/*
- * Typedefinition: node_S
- * -----------------------
- *  Contains the pointer to the next node
- *  in the list and the data in that node.
- */
-typedef struct
-{
-	node_S *next;
-	void *data;
-}node_S;
 
 /* Function prototypes. */
 
@@ -183,6 +184,64 @@ int pass_along(char *nextPort,message_S *message);
  *  it returns 1.
  */
 int send_all(int sockfd,void *message,int *len);
+
+/* list.c */
+
+/*
+ * Function: new_list
+ * Usage: Creates a new list.
+ * ---------------------------
+ *  new_list creates a new list.
+ *  It returns a pointer to the
+ *  new list.
+ */
+list_S *new_list(void);
+
+/*
+ * Function: new_node
+ * Usage: Creates a new node.
+ * ---------------------------
+ *  new_node creates a new node with
+ *  the data sendt in though the parameter
+ *  to the function. It returns a pointer
+ *  to the new node.
+ */
+struct node_S *new_node(void *data);
+
+/*
+ * Function: add_first
+ * Usage: Adds a new node to the front of the list.
+ * -------------------------------------------------
+ *  add_first creates and adds a new node first in the list.
+ */
+void add_first(list_S *l,void *data);
+
+/*
+ * Function: remove_first
+ * Usage: Removes the first node in the list.
+ * -------------------------------------------
+ *  remove_first removes the first node in the list.
+ */
+void remove_first(list_S *l);
+
+/*
+ * Function: get_first
+ * Usage: Returns the value of the first node.
+ * --------------------------------------------
+ *  get_first returns the data from the first node,
+ *  if there doesn't exist a first node get_first
+ *  returns NULL.
+ */
+void *get_first(list_S *l);
+
+/*
+ * Function: list_size
+ * Usage: Returns the size of the list.
+ * -------------------------------------
+ *  list_size returns the size of the list,
+ *  (the amount of nodes in the list).
+ */
+int list_size(list_S *l);
 
 /* nodes.c */
 

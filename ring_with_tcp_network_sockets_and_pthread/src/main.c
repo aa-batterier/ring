@@ -26,7 +26,7 @@ int main(void)
 	char line[MAX_LINE];
 	int numberThreads,err;
 	message_S message;
-	void *trv;
+	list_S *list = new_list();
 	printf("Send a message n times through a ring of n number of threads.\nNumber of threads: ");
 	if (!read_line(line,MAX_LINE))
 	{
@@ -55,22 +55,21 @@ int main(void)
 		fprintf(stderr,"read_line failed.\n");
 		exit(1);
 	}
-	pthread_t tid[numberThreads];
-	thread_S thrS[numberThreads];
 	for (int i = 0; i < numberThreads; i++)
 	{
-		to_string(thrS[i].port,POWER,to_int(START_PORT)+i);
+		thread_S *thrS = (thread_S*)malloc(sizeof(thread_S));
+		to_string(thrS->port,POWER,to_int(START_PORT)+i);
 		if (i == numberThreads-1)
 		{
-			to_string(thrS[i].nextPort,POWER,to_int(START_PORT));
+			to_string(thrS->nextPort,POWER,to_int(START_PORT));
 		}
 		else
 		{
-			to_string(thrS[i].nextPort,POWER,to_int(START_PORT)+i+1);
+			to_string(thrS->nextPort,POWER,to_int(START_PORT)+i+1);
 		}
 		if (i == 0)
 		{
-			if ((err = pthread_create(&tid[i],NULL,thr_main,&thrS[i])) < 0)
+			if ((err = pthread_create(&thrS->tid,NULL,thr_main,thrS)) < 0)
 			{
 				fprintf(stderr,"pthread_create: %s.\n",strerror(err));
 				exit(1);
@@ -78,12 +77,13 @@ int main(void)
 		}
 		else
 		{
-			if ((err = pthread_create(&tid[i],NULL,thr_fn,&thrS[i])) < 0)
+			if ((err = pthread_create(&thrS->tid,NULL,thr_fn,thrS)) < 0)
 			{
 				fprintf(stderr,"pthread_create: %s.\n",strerror(err));
 				exit(1);
 			}
 		}
+		add_first(list,thrS);
 	}
 	sleep(1);
 	if (!pass_along(START_PORT,&message))
@@ -91,11 +91,18 @@ int main(void)
 		fprintf(stderr,"pass_along failed.\n");
 		exit(1);
 	}
-	if ((err = pthread_join(tid[0],&trv)) < 0)
+	while (list_size(list) > 0)
 	{
-		fprintf(stderr,"pthread_join: %s.\n",strerror(err));
-		exit(1);
+		thread_S *thrS = get_first(list);
+		void *trv;
+		if ((err = pthread_join(thrS->tid,&trv)) < 0)
+		{
+			fprintf(stderr,"pthread_join: %s\n",strerror(err));
+			exit(1);
+		}
+		printf("Return value from node %s is %lu.\n",thrS->port,(unsigned long)trv);
+		remove_first(list);
 	}
-	printf("The ring has ended, return value from the main node is %lu.\n",(unsigned long)trv);
+	printf("The ring has ended.\n");
 	exit(0);
 }

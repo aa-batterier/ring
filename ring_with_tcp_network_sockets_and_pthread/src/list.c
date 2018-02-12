@@ -9,7 +9,7 @@ list_S *new_list(void)
 {
 	list_S *newList = (list_S*)malloc(sizeof(list_S));
 	*newList = (list_S){NULL,0};
-	return *newList;
+	return newList;
 }
 
 /*
@@ -17,11 +17,11 @@ list_S *new_list(void)
  * Usage: Creates a new node.
  * ---------------------------
  */
-node_S *new_node(void *data)
+struct node_S *new_node(void *data)
 {
-	node_S *newNode = (node_S*)malloc(sizeof(node_S));
-	*newNode = (node_S){NULL,data};
-	return *newNode;
+	struct node_S *newNode = (struct node_S*)malloc(sizeof(struct node_S));
+	*newNode = (struct node_S){NULL,data};
+	return newNode;
 }
 
 /*
@@ -31,4 +31,48 @@ node_S *new_node(void *data)
  */
 void add_first(list_S *l,void *data)
 {
-	node_S *newNode = new_node(data);
+	struct node_S *newNode = new_node(data);
+	newNode->next = l->first;
+	l->first = newNode;
+	l->n++;
+}
+
+/*
+ * Function: remove_first
+ * Usage: Removes the first node in the list.
+ * -------------------------------------------
+ */
+void remove_first(list_S *l)
+{
+	if (l->first != NULL)
+	{
+		struct node_S *removeNode = l->first;
+		l->first = removeNode->next;
+		free(removeNode);
+		l->n--;
+	}
+}
+
+/*
+ * Function: get_first
+ * Usage: Returns the value of the first node.
+ * --------------------------------------------
+ */
+void *get_first(list_S *l)
+{
+	if (l->first != NULL)
+	{
+		return l->first->data;
+	}
+	return NULL;
+}
+
+/*
+ * Function: list_size
+ * Usage: Returns the size of the list.
+ * -------------------------------------
+ */
+int list_size(list_S *l)
+{
+	return l->n;
+}
