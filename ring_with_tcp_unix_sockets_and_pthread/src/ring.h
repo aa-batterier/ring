@@ -107,7 +107,7 @@
 /* Typedefinitions. */
 
 /*
- * Typedefinitions: Thread
+ * Typedefinition: Thread
  * ------------------------
  *  Contains all the arguments that the
  *  threads needs, it's own name and the
@@ -116,10 +116,11 @@
 typedef struct
 {
 	char name[7],next[7];
+	pthread_t tid;
 }Thread;
 
 /*
- * Typedefinitions: Message
+ * Typedefinition: Message
  * -------------------------
  *  Contains the message and a counter on
  *  number of times the message are going
@@ -130,6 +131,33 @@ typedef struct
 	char text[MAX_LINE];
 	int count;
 }Message;
+
+/*
+ * Typedefinition: Node
+ * ---------------------
+ *  Contains the data in the node and a
+ *  pointer to the next node in the list.
+ *  I don't use typedef here becase I need
+ *  a pointer of the same type as this struct
+ *  in this struct.
+ */
+struct Node
+{
+	struct Node *next;
+	void *data;
+};
+
+/*
+ * Typedefinition: List
+ * ---------------------
+ *  Contains a pointer to the first node in the list
+ *  and the size of the list (amount of nodes in the list).
+ */
+typedef struct
+{
+	struct Node *first;
+	int size;
+}List;
 
 /* Function prototypes. */
 
@@ -174,6 +202,61 @@ int start_connect(char *name);
  *  is specified. It returns 0 on failure, and 1 on success.
  */
 int pass_along(char *name,Message *message);
+
+/* list.c */
+
+/*
+ * Function: new_list
+ * Usage: Creates a new list.
+ * ---------------------------
+ *  new_list creates a new list and returns a pointer ot it.
+ */
+List *new_list(void);
+
+/*
+ * Function: new_node
+ * Usage: Creates a new node.
+ * ---------------------------
+ *  new_node creates a new node with the data which
+ *  is specified in the parameter to the function.
+ *  It returns a pointer to the new node.
+ */
+struct Node *new_node(void *data);
+
+/*
+ * Function: add_first
+ * Usage: Adds a new node first in the list.
+ * ------------------------------------------
+ *  add_first creates and adds a new node in the front
+ *  of the list.
+ */
+void add_first(List *l,void *data);
+
+/*
+ * Function: remove_first
+ * Usage: Removes the first node in the list.
+ * -------------------------------------------
+ *  remove_first removes the first node in the list.
+ */
+void remove_first(List *l);
+
+/*
+ * Function: get_first
+ * Usage: Returns the data from the first node.
+ * ---------------------------------------------
+ *  get_first returns the data in the first node i the list.
+ *  If the first node doesn't exist then get_first returns NULL.
+ */
+void *get_first(List *l);
+
+/*
+ * Function: list_size
+ * Usage: Returns the size of the list.
+ * -------------------------------------
+ *  list_size returns the size of the list
+ *  (amount of nodes in the list).
+ */
+int list_size(List *l);
 
 /* nodes.c */
 
