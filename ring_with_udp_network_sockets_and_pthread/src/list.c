@@ -1,3 +1,19 @@
+/*
+ * Information about sourcedevelopment.
+ * -------------------------------------
+ *  Initial creator: Andreas Johansson.
+ *  Date created: 12-02-2018
+ *  Last updated by: Andreas Johansson.
+ *  Date for update: 12-02-2018
+ */
+
+/*
+ * File: list.c
+ * -------------
+ *  In this file is the source code
+ *  the functions which handels the list.
+ */
+
 #include "ring.h"
 
 /*
