@@ -163,6 +163,61 @@ int start_listen(char *name);
  */
 int pass_along(char *name,Message *message);
 
+/* list.c */
+
+/*
+ * Function: new_list
+ * Usage: Creates a new list.
+ * ---------------------------
+ *  new_list creates a new list and returns a pointer to it.
+ */
+List *new_list(void);
+
+/*
+ * Function: new_node
+ * Usage: Creates a new node.
+ * ---------------------------
+ *  new_node creates a new node with the data which is
+ *  specified in the parameters. It returns a pointer to
+ *  the new node.
+ */
+struct Node *new_node(void *data);
+
+/*
+ * Function: add_first
+ * Usage: Adds a new node first in the list.
+ * ------------------------------------------
+ *  add_first creates a new node in the front of the list.
+ */
+void add_first(List *l,void *data);
+
+/*
+ * Function: remove_first
+ * Usage: Removes the first node in the list.
+ * -------------------------------------------
+ *  remove_first removes the first node in the list.
+ */
+void remove_first(List *l);
+
+/*
+ * Function: get_first
+ * Usage: Returns the first nodes data.
+ * -------------------------------------
+ *  get_first returns the first nodes data in the list.
+ *  If it doesn't exist a first node then get_first
+ *  returns NULL.
+ */
+void *get_first(List *l);
+
+/*
+ * Function: list_size
+ * Usage: Returns the size of the list.
+ * -------------------------------------
+ *  list_size returns the size of the list
+ *  (the amount of nodes in the list).
+ */
+int list_size(List *l);
+
 /* nodes.c */
 
 /*

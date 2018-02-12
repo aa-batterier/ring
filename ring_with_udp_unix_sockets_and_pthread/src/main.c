@@ -26,7 +26,8 @@ int main(void)
 	char line[MAX_LINE];
 	int numberThreads,err;
 	Message message;
-	void *trv;
+	//void *trv;
+	List *list = new_list();
 	printf("Send a message n times through a ring of n number of threads.\nNumber of threads: ");
 	if (!read_line(line,MAX_LINE))
 	{
@@ -55,22 +56,23 @@ int main(void)
 		fprintf(stderr,"read_line failed\n");
 		exit(1);
 	}
-	pthread_t tid[numberThreads];
-	Thread thrS[numberThreads];
+	/*pthread_t tid[numberThreads];
+	Thread thrS[numberThreads];*/
 	for (int i = 0; i < numberThreads; i++)
 	{
-		to_string(thrS[i].name,POWER,to_int(START_NAME)+i);
+		Thread *thrS = (Thread*)malloc(sizeof(Thread));
+		to_string(thrS->name,POWER,to_int(START_NAME)+i);
 		if (i == numberThreads-1)
 		{
-			to_string(thrS[i].next,POWER,to_int(START_NAME));
+			to_string(thrS->next,POWER,to_int(START_NAME));
 		}
 		else
 		{
-			to_string(thrS[i].next,POWER,to_int(START_NAME)+i+1);
+			to_string(thrS->next,POWER,to_int(START_NAME)+i+1);
 		}
 		if (i == 0)
 		{
-			if ((err = pthread_create(&tid[i],NULL,thr_main,&thrS[i])) < 0)
+			if ((err = pthread_create(&thrS->tid,NULL,thr_main,thrS)) < 0)
 			{
 				fprintf(stderr,"pthread_create failed: %s\n",strerror(err));
 				exit(1);
@@ -78,12 +80,13 @@ int main(void)
 		}
 		else
 		{
-			if ((err = pthread_create(&tid[i],NULL,thr_fn,&thrS[i])) < 0)
+			if ((err = pthread_create(&thrS->tid,NULL,thr_fn,thrS)) < 0)
 			{
 				fprintf(stderr,"pthread_create failed: %s\n",strerror(err));
 				exit(1);
 			}
 		}
+		add_first(list,thrS);
 	}
 	sleep(1);
 	if (!pass_along(START_NAME,&message))
@@ -91,7 +94,7 @@ int main(void)
 		fprintf(stderr,"pass_along failed\n");
 		exit(1);
 	}
-	if ((err = pthread_join(tid[0],&trv)) < 0)
+	/*if ((err = pthread_join(tid[0],&trv)) < 0)
 	{
 		fprintf(stderr,"pthread_join failed: %s\n",strerror(err));
 		exit(1);
@@ -100,6 +103,20 @@ int main(void)
 	for (int i = 0; i < numberThreads; i++)
 	{
 		unlink(thrS[i].name);
+	}*/
+	while (list_size(list) > 0)
+	{
+		void *trv;
+		Thread *thrS = get_first(list);
+		if ((err = pthread_join(thrS->tid,&trv)) < 0)
+		{
+			fprintf(stderr,"pthread_join failed: %s\n",strerror(err));
+			exit(1);
+		}
+		printf("The return value from node %s is %lu.\n",thrS->name,(unsigned long)trv);
+		unlink(thrS->name);
+		remove_first(list);
 	}
+	printf("The ring has ended.\n");
 	exit(0);
 }
