@@ -1,5 +1,27 @@
+/*
+ * Information about sourcedevelopment.
+ * -------------------------------------
+ *  Initial creator: Andreas Johansson.
+ *  Date created: 07-02-2018
+ *  Last updated by: Andreas Johansson.
+ *  Date for update: 12-02-2018
+ */
+
+/*
+ * File: text.c
+ * -------------
+ *  In this file is the source code
+ *  for the functions which handles
+ *  all the text in the program.
+ */
+
 #include "ring.h"
 
+/*
+ * Function: read_line
+ * Usage: Reads a line from stdin.
+ * --------------------------------
+ */
 int read_line(char *a,int n)
 {
 	if (fgets(a,n,stdin) == NULL)
@@ -13,6 +35,11 @@ int read_line(char *a,int n)
 	return 1;
 }
 
+/*
+ * Function: remove_nl
+ * Usage: Removes the last new line.
+ * ----------------------------------
+ */
 int remove_nl(char *a)
 {
 	int i = strlen(a)-1;
@@ -24,12 +51,22 @@ int remove_nl(char *a)
 	return 0;
 }
 
+/*
+ * Function: skip_line
+ * Usage: Skips a line.
+ * ---------------------
+ */
 void skip_line(void)
 {
 	int c;
 	while ((c = getchar()) != '\n' && c != EOF);
 }
 
+/*
+ * Function: to_int
+ * Usage: Transform a string into an int.
+ * ---------------------------------------
+ */
 int to_int(char *a)
 {
 	int sum = 0,nL[] = {0,1,2,3,4,5,6,7,8,9};
@@ -45,6 +82,11 @@ int to_int(char *a)
 	return sum;
 }
 
+/*
+ * Function: to_string
+ * Usage: Transform an int into a string.
+ * ---------------------------------------
+ */
 void to_string(char *array,int power,int number)
 {
 	int place = 0;
@@ -57,6 +99,11 @@ void to_string(char *array,int power,int number)
 	array[place] = '\0';
 }
 
+/*
+ * Function: bin_search
+ * Usage: Search a list for an int.
+ * ---------------------------------
+ */
 int bin_search(int list[],int start,int end,int x)
 {
 	int mid;

@@ -1,5 +1,26 @@
+/*
+ * Information about sourcedevelopment.
+ * -------------------------------------
+ *  Initial creator: Andreas Johansson.
+ *  Date created: 07-02-2018
+ *  Last updated by: Andreas Johansson.
+ *  Date for update: 07-02-2018
+ */
+
+/*
+ * File: main.c
+ * -------------
+ *  In this file is the source code
+ *  for the main function in the program.
+ */
+
 #include "ring.h"
 
+/*
+ * Function: main
+ * Usage: The main function.
+ * --------------------------
+ */
 int main(void)
 {
 	char line[MAX_LINE];

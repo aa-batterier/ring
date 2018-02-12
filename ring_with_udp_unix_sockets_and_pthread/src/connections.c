@@ -1,5 +1,27 @@
+/*
+ * Information about sourcedevelopment.
+ * -------------------------------------
+ *  Initial creator: Andreas Johansson.
+ *  Date created: 07-02-2018
+ *  Last updated by: Andreas Johansson.
+ *  Date for update: 12-02-2018
+ */
+
+/*
+ * File: connections.c
+ * -------------
+ *  In this file is the source code
+ *  for the functions which handles
+ *  all the connections between the nodes.
+ */
+
 #include "ring.h"
 
+/*
+ * Function: start_listen
+ * Usage: Creates a unix socket to listen on.
+ * -------------------------------------------
+ */
 int start_listen(char *name)
 {
 	int sockfd;
@@ -28,6 +50,11 @@ int start_listen(char *name)
 	return sockfd;
 }
 
+/*
+ * Function: pass_along
+ * Usage: Sends a message to the next node.
+ * -----------------------------------------
+ */
 int pass_along(char *name,Message *message)
 {
 	int sockfd;
@@ -71,6 +98,6 @@ int pass_along(char *name,Message *message)
 		unlink(un.sun_path);
 		return -1;
 	}
-	// unlink(un.sun_path); // might need to remove this, because it may never be removed otherwise, I'll try and see first.
+	unlink(un.sun_path);
 	return 1;
 }
