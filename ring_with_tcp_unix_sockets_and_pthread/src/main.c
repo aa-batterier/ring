@@ -59,14 +59,14 @@ int main(void)
 	for (int i = 0; i < numberThreads; i++)
 	{
 		Thread *thrS = (Thread*)malloc(sizeof(Thread));
-		to_string(thrS->name,POWER,to_int(START_NAME)+i);
+		sprintf(thrS->name,"%d",i);
 		if (i == numberThreads-1)
 		{
-			to_string(thrS->next,POWER,to_int(START_NAME));
+			sprintf(thrS->next,"%d",0);
 		}
 		else
 		{
-			to_string(thrS->next,POWER,to_int(START_NAME)+i+1);
+			sprintf(thrS->next,"%d",i+1);
 		}
 		if (i == 0)
 		{
@@ -87,7 +87,7 @@ int main(void)
 		add_first(list,thrS);
 	}
 	sleep(1);
-	if (!pass_along(START_NAME,&message))
+	if (!pass_along("0",&message))
 	{
 		fprintf(stderr,"pass_along failed\n");
 		exit(1);

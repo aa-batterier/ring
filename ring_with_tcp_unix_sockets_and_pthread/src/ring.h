@@ -42,28 +42,12 @@
 #define MAX_LINE 1000
 
 /*
- * Constant: START_NAME
- * ---------------------
- *  Defines the name of the first node.
- */
-#define START_NAME "0\0"
-
-/*
  * Constant: END
  * --------------
  *  Defines the ending message
  *  which makes the nodes die.
  */
 #define END "end\0"
-
-/*
- * Constant: POWER
- * ----------------
- *  Defines the power of the
- *  name who needs to be transformed
- *  from integers to strings.
- */
-#define POWER strlen(START_NAME)-1 // Can't create more than 9 threads for the moment, need a better solution for this.
 
 /*
  * Constant: PATH
@@ -320,14 +304,6 @@ void skip_line(void);
  *  -1 is returned, otherwise the integer is returned.
  */
 int to_int(char *a);
-
-/*
- * Function: to_string
- * Usage: Transform an int into a string.
- * ---------------------------------------
- *  to_string transform an integer into a string.
- */
-void to_string(char *a,int power,int number);
 
 /*
  * Function: bin_search
