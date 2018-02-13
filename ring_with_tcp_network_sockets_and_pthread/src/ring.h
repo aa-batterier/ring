@@ -57,15 +57,6 @@
 #define START_PORT "9000\0"
 
 /*
- * Constant: POWER
- * ----------------
- *  Defines the power of the
- *  ports who needs to be transformed
- *  from integers to strings.
- */
-#define POWER strlen(START_PORT)-1
-
-/*
  * Constant: END
  * --------------
  *  Defines the ending message
@@ -315,15 +306,6 @@ void skip_line(void);
  *  an int. Returns the int. 
  */
 int to_int(char *a);
-
-/*
- * Function: to_string
- * Usage: Turns an int into a string.
- * ---------------------------------
- *  to_string turns an int into a string
- *  of chars.
- */
-void to_string(char *array,int power,int number);
 
 /*
  * Function: bin_search
