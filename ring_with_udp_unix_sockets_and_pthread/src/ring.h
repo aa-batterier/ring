@@ -55,13 +55,6 @@
 #define PATH "./"
 
 /*
- * Constant: START_NAME
- * ---------------------
- *  Defines the start name of the nodes.
- */
-#define START_NAME "0"
-
-/*
  * Constant: END
  * --------------
  *  Defines the end message which will
@@ -75,16 +68,6 @@
  *  Defines the size of a message.
  */
 #define MESSAGE sizeof(Message)
-
-/*
- * Constant: POWER
- * ----------------
- *  Defines the power of the nodes name.
- *  Need to change this to some function,
- *  because it can't handle numbers bigger
- *  then 9.
- */
-#define POWER strlen(START_NAME)-1
 
 /* Typedefinitions. */
 
@@ -280,14 +263,6 @@ void skip_line(void);
  *  on failure.
  */
 int to_int(char *a);
-
-/*
- * Function: to_string
- * Usage: Transform an int into a string.
- * ---------------------------------------
- *  to_string transform an int to a string.
- */
-void to_string(char *array,int power,int number);
 
 /*
  * Function: bin_search
