@@ -86,23 +86,6 @@ int to_int(char *a)
 }
 
 /*
- * Function: to_string
- * Usage: Transform an int into a string.
- * ---------------------------------------
- */
-void to_string(char *a,int power,int n)
-{
-	int j = 0;
-	for (int i = pow(10,power); power >= 0; i /= 10,j++,power--)
-	{
-		int singular = n/i;
-		a[j] = singular + '0';
-		n -= singular*i;
-	}
-	a[j] = '\0';
-}
-
-/*
  * Function: bin_search
  * Usage: Search after a specific integer.
  * ----------------------------------------

@@ -58,14 +58,14 @@ int main(void)
 	for (int i = 0; i < numberThreads; i++)
 	{
 		thread_S *thrS = (thread_S*)malloc(sizeof(thread_S));
-		to_string(thrS->port,POWER,to_int(START_PORT)+i);
+		sprintf(thrS->port,"%d",to_int(START_PORT)+i);
 		if (i == numberThreads-1)
 		{
-			to_string(thrS->nextPort,POWER,to_int(START_PORT));
+			sprintf(thrS->nextPort,"%d",to_int(START_PORT));
 		}
 		else
 		{
-			to_string(thrS->nextPort,POWER,to_int(START_PORT)+i+1);
+			sprintf(thrS->nextPort,"%d",to_int(START_PORT)+i+1);
 		}
 		if (i == 0)
 		{

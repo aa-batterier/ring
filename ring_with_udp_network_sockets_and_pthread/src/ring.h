@@ -48,15 +48,6 @@
 #define START_PORT "9000\0"
 
 /*
- * Constant: POWER
- * ----------------
- *  Defines the power of the
- *  ports who needs to be trnasformed
- *  from integers to strings.
- */
-#define POWER strlen(START_PORT)-1 
-
-/*
  * Constant: MAX_PORT
  * -------------------
  *  Defines the maximum length of
@@ -285,15 +276,6 @@ void skip_line(void);
  *  so it returns -1 at failure and the integer at success.
  */
 int to_int(char *a);
-
-/*
- * Function: to_string
- * Usage: Transform an int into a string.
- * ---------------------------------------
- *  to_string transform an integer into a string.
- *  The string is retunred in an array.
- */
-void to_string(char *a,int power,int n);
 
 /*
  * Function: bin_search
