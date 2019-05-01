@@ -1,0 +1,8 @@
+ring_with_tcp_network_sockets_and_pthread/ring
+ring_with_tcp_network_sockets_and_pthread/*.o
+ring_with_tcp_unix_sockets_and_pthread/ring
+ring_with_tcp_unix_sockets_and_pthread/*.o
+ring_with_udp_network_sockets_and_pthread/ring
+ring_with_udp_network_sockets_and_pthread/*.o
+ring_with_udp_unix_sockets_and_pthread/ring
+ring_with_udp_unix_sockets_and_pthread/*.o
